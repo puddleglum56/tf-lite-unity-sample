@@ -56,7 +56,7 @@ public sealed class BlazePoseSample : MonoBehaviour
         // Init camera 
         string cameraName = WebCamUtil.FindName(new WebCamUtil.PreferSpec()
         {
-            isFrontFacing = false,
+            isFrontFacing = true,
             kind = WebCamKind.WideAngle,
         });
         webcamTexture = new WebCamTexture(cameraName, 1280, 720, 30);
@@ -125,7 +125,7 @@ public sealed class BlazePoseSample : MonoBehaviour
         Vector3 min = rtCorners[0];
         Vector3 max = rtCorners[2];
 
-        var mtx = WebCamUtil.GetMatrix(-webcamTexture.videoRotationAngle, false, webcamTexture.videoVerticallyMirrored)
+        var mtx = WebCamUtil.GetMatrix(-webcamTexture.videoRotationAngle, false, false)
             * matrix.inverse;
         Vector3 a = MathTF.LerpUnclamped(min, max, mtx.MultiplyPoint3x4(new Vector3(0, 0, 0)));
         Vector3 b = MathTF.LerpUnclamped(min, max, mtx.MultiplyPoint3x4(new Vector3(1, 0, 0)));
@@ -139,7 +139,7 @@ public sealed class BlazePoseSample : MonoBehaviour
     void DrawJoints(Vector3[] joints)
     {
         // Apply webcam rotation to draw landmarks correctly
-        Matrix4x4 mtx = WebCamUtil.GetMatrix(-webcamTexture.videoRotationAngle, false, webcamTexture.videoVerticallyMirrored);
+        Matrix4x4 mtx = WebCamUtil.GetMatrix(-webcamTexture.videoRotationAngle, false, false);
         Vector3 min = rtCorners[0];
         Vector3 max = rtCorners[2];
 

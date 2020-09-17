@@ -105,7 +105,7 @@ namespace TensorFlowLite
 
             VertexTransfrom = GetVertTransform(options.rotationDegree, options.mirrorHorizontal, options.mirrorVertical);
             UVRect = GetTextureST(texture, options);
-            return ApplyResize(texture, options.width, options.height, false);
+            return ApplyResize(texture, options.width, options.height, true);
         }
 
         public RenderTexture Resize(Texture texture,

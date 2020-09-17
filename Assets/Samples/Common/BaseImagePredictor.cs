@@ -52,9 +52,9 @@ namespace TensorFlowLite
             resizer = new TextureResizer();
             resizeOptions = new TextureResizer.ResizeOptions()
             {
-                aspectMode = TextureResizer.AspectMode.Fill,
+                aspectMode = TextureResizer.AspectMode.Fit,
                 rotationDegree = 0,
-                mirrorHorizontal = false,
+                mirrorHorizontal = true,
                 mirrorVertical = false,
                 width = width,
                 height = height,
@@ -99,6 +99,7 @@ namespace TensorFlowLite
             var idim0 = interpreter.GetInputTensorInfo(0).shape;
             height = idim0[1];
             width = idim0[2];
+            Debug.Log($"Init inputs size {width} {height}");
             channels = idim0[3];
             input0 = new T[height, width, channels];
 
